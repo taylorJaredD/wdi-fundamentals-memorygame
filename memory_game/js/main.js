@@ -37,16 +37,27 @@
  			alert("Sorry, try again");
  	}
  }
- var flipCard = function (cardId) {
+ var flipCard = function () {
+ 	this.getAttribute('data-id') = cardId;
  	console.log("User flipped " + cards[cardId].rank);
  	console.log(cards[cardId].cardImage);
  	console.log(cards[cardId].suit);
  	cardsInPlay.push(cards[cardId].rank);
+ 	this.setAttribute(cards[cardId].cardImage);
  	if (cardsInPlay.length === 2) {
  		checkForMatch();
  	}
  }
- flipCard(0);
- flipCard(2);
+var createBoard = function () {
+	for (var i = 0; i < cards.length; i++) {
+		var cardElement = document.createElement('img');
+		cardElement.setAttribute("images/back.png");
+		cardElement.className = 'data-id' + i;
+		cardElement.addEventListener('click', flipCard);
+		document.getElementsByTagName('game-board')[0].appendChild(cardElement);
+	}
+}
+
+ createBoard();
 
 
